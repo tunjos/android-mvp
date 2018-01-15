@@ -9,15 +9,13 @@ android:
     - build-tools-26.0.2
     - android-26
     
-    # Additional c
     # - extra-google-google_play_services
     # - extra-google-m2repository
     - extra-android-m2repository
     # - addon-google_apis-google-26
-		
     - sys-img-armeabi-v7a-android-26
 
-licenses:
+  licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
