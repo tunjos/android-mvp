@@ -1,14 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion project.ext.appCompileSdkVersion
+    buildToolsVersion project.ext.appBuildToolsVersion
+
     defaultConfig {
-        applicationId "co.tunjos.mvp"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId project.ext.appApplicationId
+
+        minSdkVersion project.ext.appMinSdkVersion
+        targetSdkVersion project.ext.appTargetSdkVersion
+
+        versionCode project.ext.appVersionCode
+        versionName project.ext.appVersionName
+
+        testInstrumentationRunner project.ext.appTestInstrumentationRunner
+
+        printf("\n------------- " + applicationId + " -------------")
+        printf("\nversionName: " + versionName)
+        printf("\nversionCode: " + versionCode + "\n\n")
     }
     buildTypes {
         release {
@@ -26,4 +35,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
 }

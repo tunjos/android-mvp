@@ -1,14 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,6 +19,26 @@ allprojects {
         google()
         jcenter()
     }
+
+    def versionMajor = 0
+    def versionMinor = 1
+    def versionPatch = 0
+    def versionBuild = 0
+
+    project.ext {
+        appApplicationId = "co.tunjos.mvp"
+
+        appBuildToolsVersion = "26.0.2"
+        appCompileSdkVersion = 26
+        appMinSdkVersion = 15
+        appTargetSdkVersion = 26
+
+        appVersionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        appVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+        appTestInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    }
+
 }
 
 task clean(type: Delete) {
