@@ -15,6 +15,8 @@ android {
 
         testInstrumentationRunner project.ext.appTestInstrumentationRunner
 
+        buildConfigField("String", "GITHUB_API_BASE_URL",  "\"${GithubApiBaseUrl}\"")
+
         printf("\n------------- " + applicationId + " -------------")
         printf("\nversionName: " + versionName)
         printf("\nversionCode: " + versionCode + "\n\n")
@@ -35,5 +37,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation "com.jakewharton:butterknife:${versions.butterknife}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
 
 }
