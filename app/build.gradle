@@ -4,6 +4,9 @@ android {
     compileSdkVersion project.ext.appCompileSdkVersion
     buildToolsVersion project.ext.appBuildToolsVersion
 
+    def latestGitCommitSha = "\"${getLatestGitCommitSha()}\""
+    def latestBuildTime = "\"${getLatestBuildTime()}\""
+
     defaultConfig {
         applicationId project.ext.appApplicationId
 
@@ -15,13 +18,24 @@ android {
 
         testInstrumentationRunner project.ext.appTestInstrumentationRunner
 
+        buildConfigField("String", "latestGitCommitSha", latestGitCommitSha)
+        buildConfigField("String", "latestBuildTime", latestBuildTime)
+
         buildConfigField("String", "GITHUB_API_BASE_URL",  "\"${GithubApiBaseUrl}\"")
 
         printf("\n------------- " + applicationId + " -------------")
         printf("\nversionName: " + versionName)
-        printf("\nversionCode: " + versionCode + "\n\n")
+        printf("\nversionCode: " + versionCode)
+
+        printf("\nlatestGitCommitSha: " + latestGitCommitSha)
+        printf("\nlatestBuildTime: " + latestBuildTime + "\n\n")
     }
+
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix latestGitCommitSha
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
