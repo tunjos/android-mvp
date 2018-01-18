@@ -9,6 +9,7 @@ import retrofit2.http.Path;
 
 
 public interface GithubService {
+    String ACCEPT_HEADER_JSON = "application/vnd.github.v3+json";
 
     @GET("users/{username}/repos")
     Single<List<Repo>> getRepos(@Path("username") String username);

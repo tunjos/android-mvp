@@ -1,5 +1,7 @@
 package co.tunjos.mvp.api;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 import co.tunjos.mvp.AndroidMVPApplication;
@@ -20,11 +22,11 @@ public class GithubServiceFactory {
     private static final int CACHE_SIZE = 20 * 1024 * 1024; //20MB
 
     public static GithubService createGithubService() {
-        OkHttpClient okHttpClient = createOkHttpClient(createLoggingInterceptor());
+        OkHttpClient okHttpClient = createOkHttpClient(createLoggingInterceptor(), createAddHeadersInterceptor());
         return createGithubService(okHttpClient);
     }
 
-    private static GithubService createGithubService(OkHttpClient okHttpClient) {
+    private static GithubService createGithubService(@NonNull OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.GITHUB_API_BASE_URL)
                 .client(okHttpClient)
@@ -34,18 +36,23 @@ public class GithubServiceFactory {
         return retrofit.create(GithubService.class);
     }
 
-    private static OkHttpClient createOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
+    private static OkHttpClient createOkHttpClient(@NonNull HttpLoggingInterceptor httpLoggingInterceptor,@NonNull AddHeadersInterceptor addHeadersInterceptor) {
         return new OkHttpClient.Builder()
+                .addNetworkInterceptor(addHeadersInterceptor)
                 .addNetworkInterceptor(httpLoggingInterceptor)
                 .cache(createCache())
                 .build();
     }
 
+    private static AddHeadersInterceptor createAddHeadersInterceptor() {
+        return new AddHeadersInterceptor();
+    }
+
     private static HttpLoggingInterceptor createLoggingInterceptor() {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY
                 : HttpLoggingInterceptor.Level.NONE);
-        return logging;
+        return httpLoggingInterceptor;
     }
 
     private static Cache createCache() {
