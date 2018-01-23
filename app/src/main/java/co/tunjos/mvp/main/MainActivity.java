@@ -9,14 +9,24 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import co.tunjos.mvp.R;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+import co.tunjos.mvp.R;
+import co.tunjos.mvp.api.model.Repo;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+
+public class MainActivity extends AppCompatActivity implements MainMVPView {
+    @Inject MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainPresenter.attachView(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        mainPresenter.getRepos();
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -50,5 +61,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+
+    }
+
+    @Override
+    public void showRepos(List<Repo> repos) {
+
+    }
+
+    @Override
+    public void showError() {
+
     }
 }

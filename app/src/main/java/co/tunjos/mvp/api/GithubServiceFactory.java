@@ -1,5 +1,6 @@
 package co.tunjos.mvp.api;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
@@ -21,8 +22,8 @@ public class GithubServiceFactory {
 
     private static final int CACHE_SIZE = 20 * 1024 * 1024; //20MB
 
-    public static GithubService createGithubService() {
-        OkHttpClient okHttpClient = createOkHttpClient(createLoggingInterceptor(), createAddHeadersInterceptor());
+    public static GithubService createGithubService(@NonNull Context context) {
+        OkHttpClient okHttpClient = createOkHttpClient(createLoggingInterceptor(), createAddHeadersInterceptor(), context);
         return createGithubService(okHttpClient);
     }
 
@@ -36,11 +37,13 @@ public class GithubServiceFactory {
         return retrofit.create(GithubService.class);
     }
 
-    private static OkHttpClient createOkHttpClient(@NonNull HttpLoggingInterceptor httpLoggingInterceptor,@NonNull AddHeadersInterceptor addHeadersInterceptor) {
+    private static OkHttpClient createOkHttpClient(@NonNull HttpLoggingInterceptor httpLoggingInterceptor,
+                                                   @NonNull AddHeadersInterceptor addHeadersInterceptor,
+                                                   @NonNull Context context) {
         return new OkHttpClient.Builder()
                 .addNetworkInterceptor(addHeadersInterceptor)
                 .addNetworkInterceptor(httpLoggingInterceptor)
-                .cache(createCache())
+                .cache(createCache(context))
                 .build();
     }
 
@@ -55,7 +58,7 @@ public class GithubServiceFactory {
         return httpLoggingInterceptor;
     }
 
-    private static Cache createCache() {
-        return new Cache(AndroidMVPApplication.getAppContext().getCacheDir(), CACHE_SIZE);
+    private static Cache createCache(@NonNull Context context) {
+        return new Cache(context.getCacheDir(), CACHE_SIZE);
     }
 }
