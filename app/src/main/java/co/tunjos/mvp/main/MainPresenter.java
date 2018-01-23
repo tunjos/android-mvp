@@ -12,24 +12,19 @@ import io.reactivex.disposables.CompositeDisposable;
  * Presenter for the {@link MainActivity}.
  */
 class MainPresenter extends BasePresenter<MainMVPView> {
-    private final DataManager dataManager;
-    private CompositeDisposable compositeDisposable;
 
     @Inject
     MainPresenter(@NonNull DataManager dataManager,
                   @NonNull CompositeDisposable compositeDisposable) {
-        this.dataManager = dataManager;
-        this.compositeDisposable = compositeDisposable;
+        super(dataManager, compositeDisposable);
     }
 
     @Override
     public void detachView() {
         super.detachView();
-        compositeDisposable.clear();
     }
 
     void getRepos() {
         checkViewAttached();
-
     }
 }

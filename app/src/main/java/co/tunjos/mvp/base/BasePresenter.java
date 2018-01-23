@@ -1,12 +1,25 @@
 package co.tunjos.mvp.base;
 
+import android.support.annotation.NonNull;
+
+import co.tunjos.mvp.api.managers.DataManager;
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Base class that implements the {@link Presenter} interface and provides a base implementation for
  * {@link Presenter#attachView(MVPView)} and {@link Presenter#detachView()}. It also keeps a reference
  * to any attached view, accessible by calling {@link BasePresenter#getMvpView()}.
  */
 public class BasePresenter<T extends MVPView> implements Presenter<T> {
+    private final CompositeDisposable compositeDisposable;
+    private final DataManager dataManager;
+
     private T mvpView;
+
+    public BasePresenter(@NonNull DataManager dataManager, @NonNull CompositeDisposable compositeDisposable) {
+        this.dataManager = dataManager;
+        this.compositeDisposable = compositeDisposable;
+    }
 
     @Override
     public void attachView(T mvpView) {
@@ -15,25 +28,35 @@ public class BasePresenter<T extends MVPView> implements Presenter<T> {
 
     @Override
     public void detachView() {
+        getCompositeDisposable().dispose();
         mvpView = null;
     }
 
-    public boolean isViewAttached() {
+    protected boolean isViewAttached() {
         return mvpView != null;
     }
 
-    public T getMvpView() {
+    protected T getMvpView() {
         return mvpView;
     }
 
-    public void checkViewAttached() {
+    protected void checkViewAttached() {
         if (!isViewAttached()) throw new MVPViewNotAttachedException();
     }
 
     public static class MVPViewNotAttachedException extends RuntimeException {
-        public MVPViewNotAttachedException() {
+
+        MVPViewNotAttachedException() {
             super("Please call Presenter.attachView(MVPView) before" +
                     " making data requests to the Presenter");
         }
+    }
+
+    public DataManager getDataManager() {
+        return dataManager;
+    }
+
+    protected CompositeDisposable getCompositeDisposable() {
+        return compositeDisposable;
     }
 }
