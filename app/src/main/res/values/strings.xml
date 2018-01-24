@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">android-mvp</string>
     <string name="action_settings">Settings</string>
+
+    <!-- MainActivity -->
+    <string name="err_repos">Error loading repos</string>
+
+    <!-- Username Dialog -->
+    <string name="github">Github</string>
+    <string name="username">Username</string>
+    <string name="err_username_empty">Username is empty</string>
+
+
 </resources>
