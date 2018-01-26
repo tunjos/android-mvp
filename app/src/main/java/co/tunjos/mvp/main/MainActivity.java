@@ -15,12 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import co.tunjos.mvp.BuildConfig;
 import co.tunjos.mvp.R;
 import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.model.Repo;
@@ -71,11 +73,11 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
         final TextView edtxUsername = usernameView.findViewById(R.id.edtx_username);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AndroidMVPDialogStyle);
-        builder.setTitle(R.string.tx_github);
-        builder.setView(usernameView);
-        builder.setPositiveButton(android.R.string.ok, null);
-        builder.setNegativeButton(R.string.tx_github, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AndroidMVPDialogStyle)
+                .setTitle(R.string.tx_github)
+                .setView(usernameView)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(R.string.tx_github, null);
         final AlertDialog alertDialog = builder.show();
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -110,6 +112,28 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
         });
     }
 
+    private void showAboutDialog() {
+        @SuppressLint("InflateParams")
+        View aboutView = getLayoutInflater().inflate(R.layout.about_dialog, null);
+
+        final TextView tvVersionName = aboutView.findViewById(R.id.tv_version_name);
+        final TextView tvVersionNo = aboutView.findViewById(R.id.tv_version_no);
+        final TextView tvBuildTime = aboutView.findViewById(R.id.tv_build_time);
+
+        tvVersionName.setText(BuildConfig.VERSION_NAME);
+        tvVersionNo.setText(String.format(Locale.getDefault(),"%d", BuildConfig.VERSION_CODE));
+        tvBuildTime.setText(BuildConfig.latestBuildTime);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AndroidMVPDialogStyle)
+                .setTitle(R.string.action_about)
+                .setView(aboutView)
+                .setPositiveButton(android.R.string.ok, null);
+        final AlertDialog alertDialog = builder.show();
+
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,13 +143,10 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            showAboutDialog();
             return true;
         }
 

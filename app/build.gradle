@@ -36,7 +36,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
-            versionNameSuffix "-" + latestGitCommitSha.tr('\"', ' ')
+            versionNameSuffix " -" + latestGitCommitSha.tr('\"', '')
         }
         release {
             minifyEnabled false
