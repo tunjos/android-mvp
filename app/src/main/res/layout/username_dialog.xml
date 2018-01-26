@@ -31,9 +31,9 @@
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:hint="@string/username"
+        android:hint="@string/tx_username"
         android:maxLines="1"
         android:singleLine="true"
-        tools:hint="@string/username"
+        tools:hint="@string/tx_username"
         tools:text="Github" />
 </LinearLayout>

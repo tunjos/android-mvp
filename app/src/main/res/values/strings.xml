@@ -6,8 +6,8 @@
     <string name="err_repos">Error loading repos</string>
 
     <!-- Username Dialog -->
-    <string name="github">Github</string>
-    <string name="username">Username</string>
+    <string name="tx_github">Github</string>
+    <string name="tx_username">Username</string>
     <string name="err_username_empty">Username is empty</string>
 
 

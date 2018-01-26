@@ -3,9 +3,10 @@ package co.tunjos.mvp.api;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import co.tunjos.mvp.AndroidMVPApplication;
 import co.tunjos.mvp.BuildConfig;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -24,15 +25,16 @@ public class GithubServiceFactory {
 
     public static GithubService createGithubService(@NonNull Context context) {
         OkHttpClient okHttpClient = createOkHttpClient(createLoggingInterceptor(), createAddHeadersInterceptor(), context);
-        return createGithubService(okHttpClient);
+        return createGithubService(okHttpClient, createGson());
     }
 
-    private static GithubService createGithubService(@NonNull OkHttpClient okHttpClient) {
+    private static GithubService createGithubService(@NonNull OkHttpClient okHttpClient,
+                                                     @NonNull Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.GITHUB_API_BASE_URL)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(GithubService.class);
     }
@@ -45,6 +47,12 @@ public class GithubServiceFactory {
                 .addNetworkInterceptor(httpLoggingInterceptor)
                 .cache(createCache(context))
                 .build();
+    }
+
+    private static Gson createGson() {
+        return new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
     }
 
     private static AddHeadersInterceptor createAddHeadersInterceptor() {

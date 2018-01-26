@@ -20,14 +20,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_repos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".main.MainActivity"
+        tools:listitem="@layout/repo_list_item"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_margin="@dimen/standard_margin"
+        android:src="@drawable/ic_github"
+        app:srcCompat="@drawable/ic_github" />
 
 </android.support.design.widget.CoordinatorLayout>

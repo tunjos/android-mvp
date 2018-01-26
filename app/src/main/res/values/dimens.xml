@@ -1,3 +1,6 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="standard_margin">16dp</dimen>
+
+    <dimen name="tx_large">16sp</dimen>
+    <dimen name="tx_small">16sp</dimen>
 </resources>
