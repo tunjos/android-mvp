@@ -80,35 +80,28 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
                 .setNegativeButton(R.string.tx_github, null);
         final AlertDialog alertDialog = builder.show();
 
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = edtxUsername.getText().toString();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String username = edtxUsername.getText().toString();
 
-                if (username.length() == 0) {
-                    edtxUsername.setError(getString(R.string.err_username_empty));
-                    return;
-                }
-
-                mainPresenter.getRepos(username);
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setSubtitle(username);
-                }
-                alertDialog.dismiss();
+            if (username.length() == 0) {
+                edtxUsername.setError(getString(R.string.err_username_empty));
+                return;
             }
+
+            mainPresenter.getRepos(username);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setSubtitle(username);
+            }
+            alertDialog.dismiss();
         });
 
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                edtxUsername.setText("");
-                mainPresenter.getRepos(GithubService.USERNAME_GITHUB);
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setSubtitle(GithubService.USERNAME_GITHUB);
-                }
-                alertDialog.dismiss();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
+            edtxUsername.setText("");
+            mainPresenter.getRepos(GithubService.USERNAME_GITHUB);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setSubtitle(GithubService.USERNAME_GITHUB);
             }
+            alertDialog.dismiss();
         });
     }
 

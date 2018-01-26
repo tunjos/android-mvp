@@ -28,11 +28,6 @@ class MainPresenter extends BasePresenter<MainMVPView> {
         super(dataManager, compositeDisposable);
     }
 
-    @Override
-    public void detachView() {
-        super.detachView();
-    }
-
     void getRepos(@NonNull String username) {
         checkViewAttached();
         getMvpView().showMessageView(false);

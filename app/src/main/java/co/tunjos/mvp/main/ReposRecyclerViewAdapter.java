@@ -52,28 +52,19 @@ public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecycler
         holder.tvStarGazersCount.setText(String.format("%d", holder.repo.stargazersCount));
         holder.tvForks.setText(String.format("%d", holder.repo.forks));
 
-        holder.llProjectContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != clickListener) {
-                    clickListener.onClickRepo(holder.repo);
-                }
+        holder.llProjectContainer.setOnClickListener(v -> {
+            if (null != clickListener) {
+                clickListener.onClickRepo(holder.repo);
             }
         });
-        holder.tvStarGazersCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (clickListener != null) {
-                    clickListener.onClickStargazers(holder.repo.stargazersUrl);
-                }
+        holder.tvStarGazersCount.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onClickStargazers(holder.repo.stargazersUrl);
             }
         });
-        holder.tvForks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (clickListener != null) {
-                    clickListener.onClickForks(holder.repo.forksUrl);
-                }
+        holder.tvForks.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onClickForks(holder.repo.forksUrl);
             }
         });
     }
