@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class ActivityModule {
 
     @Provides
-    CompositeDisposable providesCompositeDisposable() {
+    CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
     }
 }

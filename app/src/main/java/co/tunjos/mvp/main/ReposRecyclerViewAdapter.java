@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -28,11 +29,15 @@ public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecycler
         repos = Collections.emptyList();
     }
 
-    void setRepos(List<Repo> repos) {
+    void setRepos(@NonNull List<Repo> repos) {
         this.repos = repos;
     }
 
-    void setClickListener(ClickListener clickListener) {
+    void clear() {
+        repos.clear();
+    }
+
+    void setClickListener(@NonNull ClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -49,8 +54,8 @@ public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecycler
         holder.tvName.setText(holder.repo.name);
         holder.tvDescription.setText(holder.repo.description);
         holder.tvLanguage.setText(holder.repo.language);
-        holder.tvStarGazersCount.setText(String.format("%d", holder.repo.stargazersCount));
-        holder.tvForks.setText(String.format("%d", holder.repo.forks));
+        holder.tvStarGazersCount.setText(String.format(Locale.getDefault(), "%d", holder.repo.stargazersCount));
+        holder.tvForks.setText(String.format(Locale.getDefault(), "%d", holder.repo.forks));
 
         holder.llProjectContainer.setOnClickListener(v -> {
             if (null != clickListener) {

@@ -22,7 +22,7 @@ public class BasePresenter<T extends MVPView> implements Presenter<T> {
     }
 
     @Override
-    public void attachView(T mvpView) {
+    public void attachView(@NonNull T mvpView) {
         this.mvpView = mvpView;
     }
 
@@ -32,7 +32,7 @@ public class BasePresenter<T extends MVPView> implements Presenter<T> {
         mvpView = null;
     }
 
-    protected boolean isViewAttached() {
+    private boolean isViewAttached() {
         return mvpView != null;
     }
 

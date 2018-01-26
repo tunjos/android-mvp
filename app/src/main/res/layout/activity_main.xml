@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context="co.tunjos.mvp.main.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="@dimen/tx_large"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,13 +44,13 @@
         android:id="@+id/rv_repos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="2dp"
         app:layoutManager="LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".main.MainActivity"
-        tools:listitem="@layout/repo_list_item"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        tools:listitem="@layout/repo_list_item" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabUsername"

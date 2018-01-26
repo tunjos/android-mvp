@@ -10,10 +10,8 @@ import co.tunjos.mvp.injection.modules.ApplicationModule;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import timber.log.Timber;
 
-/**
- *
- */
 
 public class AndroidMVPApplication extends Application implements HasActivityInjector {
     @Inject DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
@@ -21,6 +19,10 @@ public class AndroidMVPApplication extends Application implements HasActivityInj
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

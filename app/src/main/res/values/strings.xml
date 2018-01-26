@@ -4,6 +4,7 @@
 
     <!-- MainActivity -->
     <string name="err_repos">Error loading repos</string>
+    <string name="tx_empty_repo">Empty repositories</string>
 
     <!-- Username Dialog -->
     <string name="tx_github">Github</string>

@@ -1,8 +1,10 @@
 package co.tunjos.mvp.main;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_repos) RecyclerView rvRepos;
+    @BindView(R.id.tv_msg) TextView tvMsg;
+    @BindView(R.id.pb_loading) ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
                 return;
             }
 
+            clearReposRecyclerViewAdapter();
+
             mainPresenter.getRepos(username);
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setSubtitle(username);
@@ -114,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
         final TextView tvBuildTime = aboutView.findViewById(R.id.tv_build_time);
 
         tvVersionName.setText(BuildConfig.VERSION_NAME);
-        tvVersionNo.setText(String.format(Locale.getDefault(),"%d", BuildConfig.VERSION_CODE));
+        tvVersionNo.setText(String.format(Locale.getDefault(), "%d", BuildConfig.VERSION_CODE));
         tvBuildTime.setText(BuildConfig.latestBuildTime);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AndroidMVPDialogStyle)
@@ -124,6 +131,11 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
         final AlertDialog alertDialog = builder.show();
 
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
+    }
+
+    private void clearReposRecyclerViewAdapter() {
+        reposRecyclerViewAdapter.clear();
+        reposRecyclerViewAdapter.notifyDataSetChanged();
     }
 
 
@@ -147,29 +159,39 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
     }
 
     @Override
-    public void showRepos(List<Repo> repos) {
+    public void showRepos(@NonNull List<Repo> repos) {
+        rvRepos.setVisibility(View.VISIBLE);
         reposRecyclerViewAdapter.setRepos(repos);
         reposRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showProgress(boolean show) {
-
+        pbLoading.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
-    public void showError(int resId) {
+    public void showMessage(@NonNull String message, boolean error) {
+        rvRepos.setVisibility(View.VISIBLE);
+        if (error) {
+            tvMsg.setTextColor(Color.RED);
+        }
+        tvMsg.setText(message);
+    }
 
+    @Override
+    public void showMessage(@StringRes int resId, boolean error) {
+        showMessage(getString(resId), error);
     }
 
     @Override
     public void showEmpty() {
-
+        showMessage(R.string.tx_empty_repo, false);
     }
 
     @Override
     public void showMessageView(boolean show) {
-
+        tvMsg.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -10,11 +10,8 @@ import okhttp3.Response;
 
 import static co.tunjos.mvp.api.GithubService.ACCEPT_HEADER_JSON;
 
-/**
- *
- */
 
-class AddHeadersInterceptor implements Interceptor {
+public class AddHeadersInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
