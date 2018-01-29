@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Singleton;
 
+import co.tunjos.mvp.util.SharedPreferencesHelper;
 import dagger.Module;
 import dagger.Provides;
 
@@ -39,5 +40,11 @@ public class ApplicationModule {
     @Singleton
     Handler provideHandler() {
         return new Handler(Looper.getMainLooper());
+    }
+
+    @Provides
+    @Singleton
+    SharedPreferencesHelper SharedPreferencesHelper() {
+        return new SharedPreferencesHelper(application);
     }
 }
