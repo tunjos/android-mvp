@@ -75,4 +75,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
     implementation "com.jakewharton.timber:timber:${versions.timber}"
 
+    // unit test dependencies
+    testCompile "org.mockito:mockito-core:${versions.mockito}"
+
 }

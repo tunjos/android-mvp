@@ -45,6 +45,7 @@ allprojects {
         versions = [
                 butterknife     : '8.8.1',
                 dagger          : '2.14.1',
+                mockito         : '2.12.0',
                 okhttp          : '3.9.1',
                 retrofit        : '2.3.0',
                 rxAndroid       : '2.0.1',
