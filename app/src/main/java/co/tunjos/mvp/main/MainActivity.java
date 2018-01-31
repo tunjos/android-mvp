@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Locale;
@@ -29,6 +28,7 @@ import co.tunjos.mvp.BuildConfig;
 import co.tunjos.mvp.R;
 import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.model.Repo;
+import co.tunjos.mvp.util.IntentUtils;
 import co.tunjos.mvp.util.NetworkUtils;
 import co.tunjos.mvp.util.SharedPreferencesHelper;
 import dagger.android.AndroidInjection;
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @Override
     public void onClickRepo(@NonNull Repo repo) {
-        Toast.makeText(this, "Repo", Toast.LENGTH_SHORT).show();
+        IntentUtils.startRepoActivity(this, repo.owner.login, repo.name);
     }
 
     @Override

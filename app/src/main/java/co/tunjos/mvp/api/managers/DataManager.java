@@ -31,7 +31,7 @@ public class DataManager {
         return githubService.getRepos(username);
     }
 
-    public Single<Repo> getRepo(@NonNull String owner, @NonNull String repo) {
+    public Single<Response<Repo>> getRepo(@NonNull String owner, @NonNull String repo) {
         return githubService.getRepo(owner, repo);
     }
 

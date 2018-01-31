@@ -6,6 +6,7 @@ package co.tunjos.mvp.api.model;
 public class Repo {
     public int id;
     public String name;
+    public Owner owner;
     public String full_name;
     public String url;
     public String forksUrl;
@@ -14,4 +15,8 @@ public class Repo {
     public int stargazersCount;
     public String language;
     public int forks;
+
+    public class Owner {
+        public String login;
+    }
 }

@@ -11,5 +11,10 @@
     <string name="tx_username">Username</string>
     <string name="err_username_empty">Username is empty</string>
 
+    <!-- RepoActivity -->
+    <string name="tx_repo">Repo</string>
+
+    <!-- RepoFragment -->
+    <string name="err_repo">Error loading repo</string>
 
 </resources>

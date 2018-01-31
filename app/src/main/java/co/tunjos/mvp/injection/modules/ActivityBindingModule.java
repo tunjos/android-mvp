@@ -1,6 +1,7 @@
 package co.tunjos.mvp.injection.modules;
 
 import co.tunjos.mvp.main.MainActivity;
+import co.tunjos.mvp.repo.RepoActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -13,4 +14,7 @@ public abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector(modules = ActivityModule.class)
     abstract MainActivity contributeMainActivityInjector();
+
+    @ContributesAndroidInjector
+    abstract RepoActivity contributeRepoActivityInjector();
 }

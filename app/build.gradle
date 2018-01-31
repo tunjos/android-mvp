@@ -23,7 +23,7 @@ android {
         buildConfigField("String", "latestGitCommitSha", latestGitCommitSha)
         buildConfigField("String", "latestBuildTime", latestBuildTime)
 
-        buildConfigField("String", "GITHUB_API_BASE_URL",  "\"${GithubApiBaseUrl}\"")
+        buildConfigField("String", "GITHUB_API_BASE_URL", "\"${GithubApiBaseUrl}\"")
 
         printf("\n------------- " + applicationId + " -------------")
         printf("\nversionName: " + versionName)

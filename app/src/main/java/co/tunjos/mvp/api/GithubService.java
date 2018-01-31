@@ -17,5 +17,5 @@ public interface GithubService {
     Single<Response<List<Repo>>> getRepos(@Path("username") String username);
 
     @GET("repos/{owner}/{repo}")
-    Single<Repo> getRepo(@Path("owner") String owner, @Path("repo") String repo);
+    Single<Response<Repo>> getRepo(@Path("owner") String owner, @Path("repo") String repo);
 }

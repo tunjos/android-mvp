@@ -28,7 +28,6 @@ public class AndroidMVPApplication extends Application implements HasActivityInj
                 .applicationModule(new ApplicationModule(this))
                 .build()
                 .inject(this);
-
     }
 
     @Override
