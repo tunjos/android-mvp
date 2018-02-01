@@ -15,8 +15,9 @@ public class Repo {
     public int stargazersCount;
     public String language;
     public int forks;
+    public int subscribersCount;
 
-    public class Owner {
+    public static class Owner {
         public String login;
     }
 }

@@ -9,7 +9,7 @@ import static co.tunjos.mvp.util.datafactories.TestDataFactory.getRandomInt;
 import static co.tunjos.mvp.util.datafactories.TestDataFactory.getRandomUUID;
 
 /**
- * Factory class that creates instances of data models for Repo.
+ * Factory class that creates instances of data models for {@link Repo}.
  */
 public class RepoDataFactory {
 
@@ -24,11 +24,18 @@ public class RepoDataFactory {
         return getRandomUUID();
     }
 
-    private Repo createRepo() {
+    public Repo.Owner createOwner() {
+        Repo.Owner owner = new Repo.Owner();
+        owner.login = getRandomUUID();
+        return owner;
+    }
+
+    public Repo createRepo() {
         Repo repo = new Repo();
 
         repo.id = getRandomInt();
         repo.name = getRandomUUID();
+        repo.owner = createOwner();
         repo.full_name = getRandomUUID();
         repo.url = getRandomUUID();
         repo.forksUrl = getRandomUUID();
@@ -37,6 +44,7 @@ public class RepoDataFactory {
         repo.stargazersCount = getRandomInt();
         repo.language = getRandomUUID();
         repo.forks = getRandomInt();
+        repo.subscribersCount = getRandomInt();
 
         return repo;
     }
@@ -47,5 +55,9 @@ public class RepoDataFactory {
             repos.add(createRepo());
         }
         return repos;
+    }
+
+    public String createRepoName() {
+        return getRandomUUID();
     }
 }
