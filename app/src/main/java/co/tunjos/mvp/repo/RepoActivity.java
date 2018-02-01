@@ -40,7 +40,7 @@ public class RepoActivity extends AppCompatActivity implements HasFragmentInject
         String repoName = getIntent().getStringExtra(EXTRA_REPO_NAME);
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.fl_repo, RepoFragment.newInstance(repoOwner, repoName)).commit();
+                .add(R.id.fl_repo, RepoFragment.newInstance(repoOwner, repoName)).commit();
     }
 
     @Override

@@ -13,6 +13,10 @@
 
     <!-- RepoActivity -->
     <string name="tx_repo">Repo</string>
+    <string name="tx_watch">Watch</string>
+    <string name="tx_star">Star</string>
+    <string name="tx_fork">Fork</string>
+    <string name="tx_slash">"/"</string>
 
     <!-- RepoFragment -->
     <string name="err_repo">Error loading repo</string>

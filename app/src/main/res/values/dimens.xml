@@ -1,6 +1,9 @@
 <resources>
     <dimen name="standard_margin">16dp</dimen>
 
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+
     <dimen name="tx_large">19sp</dimen>
     <dimen name="tx_small">16sp</dimen>
 </resources>

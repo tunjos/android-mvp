@@ -2,22 +2,41 @@ package co.tunjos.mvp.repo;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.tunjos.mvp.R;
 import co.tunjos.mvp.api.model.Repo;
 import dagger.android.AndroidInjection;
 
 public class RepoFragment extends Fragment implements RepoMVPView {
+
+    @BindView(R.id.ll_owner_repo) LinearLayout llOwnerRepo;
+    @BindView(R.id.ll_stats_container) LinearLayout llStatsContainer;
+
+    @BindView(R.id.tv_owner) TextView tvOwner;
+    @BindView(R.id.tv_repo) TextView tvRepo;
+    @BindView(R.id.tv_subscribers_count) TextView tvSubscribersCount;
+    @BindView(R.id.tv_stargazers_count) TextView tvStargazersCount;
+    @BindView(R.id.tv_forks) TextView tvForks;
+    @BindView(R.id.tv_description) TextView tvDescription;
+
+    @BindView(R.id.tv_msg) TextView tvMsg;
+    @BindView(R.id.pb_loading) ProgressBar pbLoading;
 
     @Inject RepoPresenter repoPresenter;
 
@@ -63,7 +82,7 @@ public class RepoFragment extends Fragment implements RepoMVPView {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_repo, container, false);
-        ButterKnife.bind(view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -82,31 +101,42 @@ public class RepoFragment extends Fragment implements RepoMVPView {
 
     @Override
     public void showRepo(@NonNull Repo repo) {
-        Toast.makeText(getActivity(), "TEST", Toast.LENGTH_SHORT).show();
+        llOwnerRepo.setVisibility(View.VISIBLE);
+        llStatsContainer.setVisibility(View.VISIBLE);
+        tvDescription.setVisibility(View.VISIBLE);
+
+        tvOwner.setText(repo.owner.login);
+        tvRepo.setText(repo.name);
+        tvSubscribersCount.setText(String.format(Locale.getDefault(), "%s", repo.subscribersCount));
+        tvStargazersCount.setText(String.format(Locale.getDefault(), "%s", repo.stargazersCount));
+        tvForks.setText(String.format(Locale.getDefault(), "%s", repo.forks));
+        tvDescription.setText(repo.description);
     }
 
     @Override
     public void showProgress(boolean show) {
-
+        pbLoading.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
     public void showMessage(@NonNull String message, boolean error) {
-
+        if (error) {
+            tvMsg.setTextColor(Color.RED);
+        }
+        tvMsg.setText(message);
     }
 
     @Override
     public void showMessage(int resId, boolean error) {
-
+        showMessage(getString(resId), error);
     }
 
     @Override
     public void showEmpty() {
-
     }
 
     @Override
     public void showMessageView(boolean show) {
-
+        tvMsg.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 }

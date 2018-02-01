@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @Override
     public void showMessage(@NonNull String message, boolean error) {
-        rvRepos.setVisibility(View.VISIBLE);
         if (error) {
             tvMsg.setTextColor(Color.RED);
         }
@@ -201,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
     @Override
     public void showMessage(@StringRes int resId, boolean error) {
         showMessage(getString(resId), error);
-    }
+}
 
     @Override
     public void showEmpty() {
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @Override
     public void showMessageView(boolean show) {
-        tvMsg.setVisibility(View.VISIBLE);
+        tvMsg.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override

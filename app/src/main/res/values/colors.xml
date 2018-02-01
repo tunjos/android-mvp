@@ -7,4 +7,6 @@
     <color name="blue">#4078C0</color>
     <color name="gold">#C9510C</color>
     <color name="grey">#6A737D</color>
+    <color name="light_grey">#F5F5F5</color>
+    <color name="purple">#6E5494</color>
 </resources>
