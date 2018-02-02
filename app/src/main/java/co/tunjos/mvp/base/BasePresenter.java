@@ -3,6 +3,7 @@ package co.tunjos.mvp.base;
 import android.support.annotation.NonNull;
 
 import co.tunjos.mvp.api.managers.DataManager;
+import co.tunjos.mvp.util.preferences.SharedPreferencesHelper;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -11,13 +12,17 @@ import io.reactivex.disposables.CompositeDisposable;
  * to any attached view, accessible by calling {@link BasePresenter#getMvpView()}.
  */
 public class BasePresenter<T extends MVPView> implements Presenter<T> {
-    private final CompositeDisposable compositeDisposable;
     private final DataManager dataManager;
+    private final SharedPreferencesHelper sharedPreferencesHelper;
+    private final CompositeDisposable compositeDisposable;
 
     private T mvpView;
 
-    public BasePresenter(@NonNull DataManager dataManager, @NonNull CompositeDisposable compositeDisposable) {
+    public BasePresenter(@NonNull DataManager dataManager,
+                         @NonNull SharedPreferencesHelper sharedPreferencesHelper,
+                         @NonNull CompositeDisposable compositeDisposable) {
         this.dataManager = dataManager;
+        this.sharedPreferencesHelper = sharedPreferencesHelper;
         this.compositeDisposable = compositeDisposable;
     }
 
@@ -54,6 +59,10 @@ public class BasePresenter<T extends MVPView> implements Presenter<T> {
 
     public DataManager getDataManager() {
         return dataManager;
+    }
+
+    protected SharedPreferencesHelper getSharedPreferencesHelper() {
+        return sharedPreferencesHelper;
     }
 
     protected CompositeDisposable getCompositeDisposable() {

@@ -7,10 +7,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import co.tunjos.mvp.R;
+import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.managers.DataManager;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.api.model.error.APIError;
 import co.tunjos.mvp.base.BasePresenter;
+import co.tunjos.mvp.util.preferences.AppSharedPreferencesHelper;
+import co.tunjos.mvp.util.preferences.SharedPreferencesHelper;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -27,8 +30,9 @@ public class MainMVPPresenter extends BasePresenter<MainMVPView> implements Main
 
     @Inject
     MainMVPPresenter(@NonNull DataManager dataManager,
+                     @NonNull SharedPreferencesHelper sharedPreferencesHelper,
                      @NonNull CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+        super(dataManager, sharedPreferencesHelper, compositeDisposable);
     }
 
     @Override
@@ -77,5 +81,25 @@ public class MainMVPPresenter extends BasePresenter<MainMVPView> implements Main
                         getMvpView().showMessage(R.string.err_repos, true);
                     }
                 });
+    }
+
+    @Override
+    public void setFirstRun(boolean value) {
+        getSharedPreferencesHelper().setBoolean(AppSharedPreferencesHelper.PREF_FIRST_RUN, value);
+    }
+
+    @Override
+    public boolean getFirstRun() {
+        return getSharedPreferencesHelper().getBoolean(AppSharedPreferencesHelper.PREF_FIRST_RUN, true);
+    }
+
+    @Override
+    public void setLastUsername(@NonNull String username) {
+        getSharedPreferencesHelper().setString(AppSharedPreferencesHelper.PREF_LAST_USERNAME, username);
+    }
+
+    @Override
+    public String getLastUsername() {
+        return getSharedPreferencesHelper().getString(AppSharedPreferencesHelper.PREF_LAST_USERNAME, GithubService.USERNAME_GITHUB);
     }
 }

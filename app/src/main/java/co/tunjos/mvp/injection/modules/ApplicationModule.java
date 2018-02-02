@@ -11,7 +11,8 @@ import javax.inject.Singleton;
 import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.managers.DataManager;
 import co.tunjos.mvp.api.managers.GithubDataManager;
-import co.tunjos.mvp.util.SharedPreferencesHelper;
+import co.tunjos.mvp.util.preferences.AppSharedPreferencesHelper;
+import co.tunjos.mvp.util.preferences.SharedPreferencesHelper;
 import dagger.Module;
 import dagger.Provides;
 
@@ -48,7 +49,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     SharedPreferencesHelper provideSharedPreferencesHelper() {
-        return new SharedPreferencesHelper(application);
+        return new AppSharedPreferencesHelper(application);
     }
 
     @Provides

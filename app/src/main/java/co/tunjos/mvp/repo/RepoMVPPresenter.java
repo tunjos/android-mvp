@@ -10,6 +10,7 @@ import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.api.model.error.APIError;
 import co.tunjos.mvp.base.BasePresenter;
 import co.tunjos.mvp.util.SchedulerProvider;
+import co.tunjos.mvp.util.preferences.SharedPreferencesHelper;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -26,9 +27,10 @@ public class RepoMVPPresenter extends BasePresenter<RepoMVPView> implements Repo
 
     @Inject
     public RepoMVPPresenter(@NonNull DataManager dataManager,
+                            @NonNull SharedPreferencesHelper sharedPreferencesHelper,
                             @NonNull SchedulerProvider schedulerProvider,
                             @NonNull CompositeDisposable compositeDisposable) {
-        super(dataManager, compositeDisposable);
+        super(dataManager, sharedPreferencesHelper, compositeDisposable);
 
         this.schedulerProvider = schedulerProvider;
     }

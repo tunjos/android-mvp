@@ -30,7 +30,6 @@ import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.util.IntentUtils;
 import co.tunjos.mvp.util.NetworkUtils;
-import co.tunjos.mvp.util.SharedPreferencesHelper;
 import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity implements MainMVPView, ReposRecyclerViewAdapter.ClickListener {
@@ -42,10 +41,6 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
 
     @Inject MainPresenter mainPresenter;
     @Inject ReposRecyclerViewAdapter reposRecyclerViewAdapter;
-    @Inject SharedPreferencesHelper sharedPreferencesHelper;
-
-    private static final String PREF_FIRST_RUN = "pref_first_run";
-    private static final String PREF_LAST_USERNAME = "pref_last_username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +57,12 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
     }
 
     private void showDialogIfFirstRun() {
-        boolean firstRun = sharedPreferencesHelper.getBoolean(PREF_FIRST_RUN, true);
+        boolean firstRun = mainPresenter.getFirstRun();
         if (firstRun) {
             showUsernameDialog();
-            sharedPreferencesHelper.setBoolean(PREF_FIRST_RUN, false);
+            mainPresenter.setFirstRun(false);
         } else {
-            mainPresenter.getRepos(sharedPreferencesHelper.getString(PREF_LAST_USERNAME, GithubService.USERNAME_GITHUB));
+            mainPresenter.getRepos(mainPresenter.getLastUsername());
         }
     }
 
@@ -114,7 +109,8 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
             clearReposRecyclerViewAdapter();
 
             mainPresenter.getRepos(username);
-            sharedPreferencesHelper.setString(PREF_LAST_USERNAME, username);
+            mainPresenter.setLastUsername(username);
+
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setSubtitle(username);
             }
@@ -124,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
             edtxUsername.setText("");
             mainPresenter.getRepos(GithubService.USERNAME_GITHUB);
-            sharedPreferencesHelper.setString(PREF_LAST_USERNAME, GithubService.USERNAME_GITHUB);
+            mainPresenter.setLastUsername(GithubService.USERNAME_GITHUB);
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setSubtitle(GithubService.USERNAME_GITHUB);
             }
