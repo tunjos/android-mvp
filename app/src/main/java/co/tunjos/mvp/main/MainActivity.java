@@ -34,14 +34,15 @@ import co.tunjos.mvp.util.SharedPreferencesHelper;
 import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity implements MainMVPView, ReposRecyclerViewAdapter.ClickListener {
-    @Inject MainPresenter mainPresenter;
-    @Inject ReposRecyclerViewAdapter reposRecyclerViewAdapter;
-    @Inject SharedPreferencesHelper sharedPreferencesHelper;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_repos) RecyclerView rvRepos;
     @BindView(R.id.tv_msg) TextView tvMsg;
     @BindView(R.id.pb_loading) ProgressBar pbLoading;
+
+    @Inject MainPresenter mainPresenter;
+    @Inject ReposRecyclerViewAdapter reposRecyclerViewAdapter;
+    @Inject SharedPreferencesHelper sharedPreferencesHelper;
 
     private static final String PREF_FIRST_RUN = "pref_first_run";
     private static final String PREF_LAST_USERNAME = "pref_last_username";
@@ -200,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements MainMVPView, Repo
     @Override
     public void showMessage(@StringRes int resId, boolean error) {
         showMessage(getString(resId), error);
-}
+    }
 
     @Override
     public void showEmpty() {

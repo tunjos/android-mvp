@@ -12,7 +12,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBindingModule {
 
-    @ContributesAndroidInjector(modules = ActivityModule.class)
+    @ContributesAndroidInjector(modules = {ActivityModule.class, ActivityAbstractModule.class})
     abstract MainActivity contributeMainActivityInjector();
 
     @ContributesAndroidInjector

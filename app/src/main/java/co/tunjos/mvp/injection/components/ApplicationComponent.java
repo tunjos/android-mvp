@@ -8,17 +8,13 @@ import javax.inject.Singleton;
 
 import co.tunjos.mvp.AndroidMVPApplication;
 import co.tunjos.mvp.api.GithubService;
-import co.tunjos.mvp.api.managers.DataManager;
+import co.tunjos.mvp.api.managers.GithubDataManager;
 import co.tunjos.mvp.injection.modules.ActivityBindingModule;
 import co.tunjos.mvp.injection.modules.ActivityModule;
 import co.tunjos.mvp.injection.modules.ApplicationModule;
 import co.tunjos.mvp.injection.modules.FragmentBindingModule;
-import co.tunjos.mvp.injection.modules.FragmentModule;
 import co.tunjos.mvp.injection.modules.NetworkModule;
-import co.tunjos.mvp.repo.RepoActivity;
 import dagger.Component;
-import dagger.Subcomponent;
-import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjectionModule;
 
 
@@ -33,7 +29,7 @@ public interface ApplicationComponent {
 
     Application application();
 
-    DataManager dataManager();
+    GithubDataManager dataManager();
 
     GithubService githubService();
 

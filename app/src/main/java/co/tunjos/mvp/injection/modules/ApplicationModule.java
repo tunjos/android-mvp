@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Singleton;
 
+import co.tunjos.mvp.api.GithubService;
+import co.tunjos.mvp.api.managers.DataManager;
+import co.tunjos.mvp.api.managers.GithubDataManager;
 import co.tunjos.mvp.util.SharedPreferencesHelper;
 import dagger.Module;
 import dagger.Provides;
@@ -44,7 +47,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SharedPreferencesHelper SharedPreferencesHelper() {
+    SharedPreferencesHelper provideSharedPreferencesHelper() {
         return new SharedPreferencesHelper(application);
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(@NonNull GithubService githubService) {
+        return new GithubDataManager(githubService);
     }
 }

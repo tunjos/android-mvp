@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import co.tunjos.mvp.R;
-import co.tunjos.mvp.api.managers.DataManager;
+import co.tunjos.mvp.api.managers.GithubDataManager;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.api.model.error.APIError;
 import co.tunjos.mvp.util.datafactories.TestDataFactory;
@@ -27,9 +27,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MainPresenterTest {
+public class MainMVPPresenterTest {
 
-    @Mock private DataManager mockDataManager;
+    @Mock private GithubDataManager mockDataManager;
     @Mock private MainMVPView mockMainMVPView;
 
     @Rule public final RxImmediateSchedulerRule rxImmediateSchedulerRule = new RxImmediateSchedulerRule();
@@ -38,7 +38,7 @@ public class MainPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        mainPresenter = new MainPresenter(mockDataManager, new CompositeDisposable());
+        mainPresenter = new MainMVPPresenter(mockDataManager, new CompositeDisposable());
         mainPresenter.attachView(mockMainMVPView);
     }
 

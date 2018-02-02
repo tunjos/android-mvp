@@ -11,6 +11,6 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class FragmentBindingModule {
 
-    @ContributesAndroidInjector(modules = FragmentModule.class)
+    @ContributesAndroidInjector(modules = {FragmentModule.class, FragmentAbstractModule.class})
     abstract RepoFragment contributeRepoFragmentInjector();
 }

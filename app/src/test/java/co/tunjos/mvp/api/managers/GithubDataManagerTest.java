@@ -22,7 +22,7 @@ import retrofit2.Response;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DataManagerTest {
+public class GithubDataManagerTest {
 
     @Mock private GithubService mockGithubService;
 
@@ -32,7 +32,7 @@ public class DataManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        dataManager = new DataManager(mockGithubService);
+        dataManager = new GithubDataManager(mockGithubService);
     }
 
     @Test
