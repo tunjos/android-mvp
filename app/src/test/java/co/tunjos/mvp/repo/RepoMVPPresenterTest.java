@@ -1,5 +1,6 @@
 package co.tunjos.mvp.repo;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.junit.After;
@@ -15,6 +16,7 @@ import co.tunjos.mvp.api.managers.GithubDataManager;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.api.model.error.APIError;
 import co.tunjos.mvp.util.datafactories.TestDataFactory;
+import co.tunjos.mvp.util.preferences.AppSharedPreferencesHelper;
 import co.tunjos.mvp.utils.RxImmediateSchedulerRule;
 import co.tunjos.mvp.utils.TestSchedulerProvider;
 import io.reactivex.Single;
@@ -32,6 +34,7 @@ public class RepoMVPPresenterTest {
 
     @Mock private GithubDataManager mockDataManager;
     @Mock private RepoMVPView mockRepoMVPView;
+    @Mock private Context mockContext;
 
     @Rule public final RxImmediateSchedulerRule rxImmediateSchedulerRule = new RxImmediateSchedulerRule();
 
@@ -41,7 +44,7 @@ public class RepoMVPPresenterTest {
     @Before
     public void setUp() throws Exception {
         testScheduler = new TestScheduler();
-        repoPresenter = new RepoMVPPresenter(mockDataManager, new TestSchedulerProvider(testScheduler), new CompositeDisposable());
+        repoPresenter = new RepoMVPPresenter(mockDataManager, new AppSharedPreferencesHelper(mockContext), new TestSchedulerProvider(testScheduler), new CompositeDisposable());
         repoPresenter.attachView(mockRepoMVPView);
     }
 

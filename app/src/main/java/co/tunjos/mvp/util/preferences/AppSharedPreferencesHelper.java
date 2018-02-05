@@ -2,7 +2,6 @@ package co.tunjos.mvp.util.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -17,7 +16,7 @@ public class AppSharedPreferencesHelper implements SharedPreferencesHelper {
     public static final String PREF_LAST_USERNAME = "pref_last_username";
 
     public AppSharedPreferencesHelper(@NonNull Context context) {
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sharedPreferences = context.getSharedPreferences(context.getPackageName() + "_preferences", Context.MODE_PRIVATE);
     }
 
     @Override

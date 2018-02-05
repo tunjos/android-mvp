@@ -1,5 +1,6 @@
 package co.tunjos.mvp.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.junit.After;
@@ -17,6 +18,7 @@ import co.tunjos.mvp.api.managers.GithubDataManager;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.api.model.error.APIError;
 import co.tunjos.mvp.util.datafactories.TestDataFactory;
+import co.tunjos.mvp.util.preferences.AppSharedPreferencesHelper;
 import co.tunjos.mvp.utils.RxImmediateSchedulerRule;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
@@ -31,6 +33,7 @@ public class MainMVPPresenterTest {
 
     @Mock private GithubDataManager mockDataManager;
     @Mock private MainMVPView mockMainMVPView;
+    @Mock private Context mockContext;
 
     @Rule public final RxImmediateSchedulerRule rxImmediateSchedulerRule = new RxImmediateSchedulerRule();
 
@@ -38,7 +41,7 @@ public class MainMVPPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        mainPresenter = new MainMVPPresenter(mockDataManager, new CompositeDisposable());
+        mainPresenter = new MainMVPPresenter(mockDataManager, new AppSharedPreferencesHelper(mockContext), new CompositeDisposable());
         mainPresenter.attachView(mockMainMVPView);
     }
 

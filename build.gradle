@@ -23,7 +23,7 @@ allprojects {
     }
 
     def versionMajor = 0
-    def versionMinor = 1
+    def versionMinor = 2
     def versionPatch = 0
     def versionBuild = 0
 
@@ -45,6 +45,7 @@ allprojects {
         versions = [
                 butterknife     : '8.8.1',
                 dagger          : '2.14.1',
+                junit           : '4.12',
                 mockito         : '2.12.0',
                 okhttp          : '3.9.1',
                 retrofit        : '2.3.0',
