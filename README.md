@@ -24,16 +24,16 @@ Communication between different layers is done with the use of interfaces in ord
 
 APIs Used
 ----------
-**https://api.github.com/users/{username}/repos**
+**https://api.github.com/users/{username}/repos**  
 **https://api.github.com/repos/{owner}/{repo}**
 
 
 Libraries used
 --------
-- [**Butter Knife**](http://jakewharton.github.io/butterknife/): **Field and method binding for Android views.**  
+- [**Butter Knife**](https://jakewharton.github.io/butterknife/): **Field and method binding for Android views.**  
 - [**Dagger 2**](https://google.github.io/dagger/): **A fast dependency injector for Android and Java.**  
 - [**Retrofit**](https://square.github.io/retrofit/): **A type-safe HTTP client for Android and Java.**  
-- [**RxAndroid**](http://jakewharton.github.io/butterknife/): **RxJava bindings for Android.**  
+- [**RxAndroid**](https://github.com/ReactiveX/RxAndroid): **RxJava bindings for Android.**  
 - [**Timber**](https://github.com/JakeWharton/timber): **A logger with a small, extensible API which provides utility on top of Android's normal Log class.**  
 
 
