@@ -53,9 +53,22 @@ public class ReposRecyclerViewAdapter extends RecyclerView.Adapter<ReposRecycler
         holder.repo = repos.get(position);
         holder.tvName.setText(holder.repo.name);
         holder.tvDescription.setText(holder.repo.description);
-        holder.tvLanguage.setText(holder.repo.language);
-        holder.tvStarGazersCount.setText(String.format(Locale.getDefault(), "%d", holder.repo.stargazersCount));
-        holder.tvForks.setText(String.format(Locale.getDefault(), "%d", holder.repo.forks));
+        if (!(holder.repo.language == null) && !holder.repo.language.isEmpty()) {
+            holder.tvLanguage.setText(holder.repo.language);
+        } else {
+            holder.tvLanguage.setVisibility(View.INVISIBLE);
+            holder.tvLanguage.setCompoundDrawables(null, null, null, null);
+        }
+        if (holder.repo.stargazersCount > 0) {
+            holder.tvStarGazersCount.setText(String.format(Locale.getDefault(), "%d", holder.repo.stargazersCount));
+        } else {
+            holder.tvStarGazersCount.setVisibility(View.INVISIBLE);
+        }
+        if (holder.repo.forks > 0) {
+            holder.tvForks.setText(String.format(Locale.getDefault(), "%d", holder.repo.forks));
+        } else {
+            holder.tvForks.setVisibility(View.INVISIBLE);
+        }
 
         holder.llProjectContainer.setOnClickListener(v -> {
             if (null != clickListener) {

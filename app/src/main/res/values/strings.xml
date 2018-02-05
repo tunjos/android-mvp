@@ -7,7 +7,7 @@
     <string name="tx_empty_repo">Empty repositories</string>
 
     <!-- Username Dialog -->
-    <string name="tx_github">Github</string>
+    <string name="tx_github">GitHub</string>
     <string name="tx_username">Username</string>
     <string name="err_username_empty">Username is empty</string>
 
