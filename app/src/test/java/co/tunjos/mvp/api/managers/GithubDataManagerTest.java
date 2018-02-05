@@ -1,5 +1,6 @@
 package co.tunjos.mvp.api.managers;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.junit.Before;
@@ -14,6 +15,7 @@ import java.util.List;
 import co.tunjos.mvp.api.GithubService;
 import co.tunjos.mvp.api.model.Repo;
 import co.tunjos.mvp.util.datafactories.TestDataFactory;
+import co.tunjos.mvp.util.preferences.AppSharedPreferencesHelper;
 import co.tunjos.mvp.utils.RxImmediateSchedulerRule;
 import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.when;
 public class GithubDataManagerTest {
 
     @Mock private GithubService mockGithubService;
+    @Mock private Context mockContext;
 
     @Rule public final RxImmediateSchedulerRule rxImmediateSchedulerRule = new RxImmediateSchedulerRule();
 
@@ -32,7 +35,7 @@ public class GithubDataManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        dataManager = new GithubDataManager(mockGithubService);
+        dataManager = new GithubDataManager(mockGithubService, new AppSharedPreferencesHelper(mockContext));
     }
 
     @Test

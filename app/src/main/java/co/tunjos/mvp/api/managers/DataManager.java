@@ -19,11 +19,19 @@ public interface DataManager {
 
     Single<Response<Repo>> getRepo(@NonNull String owner, @NonNull String repo);
 
-    /**
-     * Convert an error {@link ResponseBody} to an {@link APIError}.
-     *
-     * @param errorBody The error {@link ResponseBody} to convert.
-     * @return The converted {@link APIError}.
-     */
+    void setFirstRun(boolean value);
+
+    boolean getFirstRun();
+
+    void setLastUsername(@NonNull String username);
+
+    String getLastUsername();
+
+        /**
+         * Convert an error {@link ResponseBody} to an {@link APIError}.
+         *
+         * @param errorBody The error {@link ResponseBody} to convert.
+         * @return The converted {@link APIError}.
+         */
     APIError convertToError(@NonNull ResponseBody errorBody);
 }

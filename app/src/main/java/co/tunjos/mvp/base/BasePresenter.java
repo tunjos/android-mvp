@@ -13,16 +13,13 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class BasePresenter<T extends MVPView> implements Presenter<T> {
     private final DataManager dataManager;
-    private final SharedPreferencesHelper sharedPreferencesHelper;
     private final CompositeDisposable compositeDisposable;
 
     private T mvpView;
 
     public BasePresenter(@NonNull DataManager dataManager,
-                         @NonNull SharedPreferencesHelper sharedPreferencesHelper,
                          @NonNull CompositeDisposable compositeDisposable) {
         this.dataManager = dataManager;
-        this.sharedPreferencesHelper = sharedPreferencesHelper;
         this.compositeDisposable = compositeDisposable;
     }
 
@@ -59,10 +56,6 @@ public class BasePresenter<T extends MVPView> implements Presenter<T> {
 
     public DataManager getDataManager() {
         return dataManager;
-    }
-
-    protected SharedPreferencesHelper getSharedPreferencesHelper() {
-        return sharedPreferencesHelper;
     }
 
     protected CompositeDisposable getCompositeDisposable() {

@@ -54,7 +54,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(@NonNull GithubService githubService) {
-        return new GithubDataManager(githubService);
+    DataManager provideDataManager(@NonNull GithubService githubService, @NonNull SharedPreferencesHelper sharedPreferencesHelper) {
+        return new GithubDataManager(githubService, sharedPreferencesHelper);
     }
 }
